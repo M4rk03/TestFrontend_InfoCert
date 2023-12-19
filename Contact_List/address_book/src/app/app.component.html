@@ -1,11 +1,13 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light" style="background-color: #cff4fc;">
   <div class="container-fluid">
-    <a class="navbar-brand"> Rubrica </a>
-    <form class="d-flex" style="align-items: center;">
-      <fa-icon [icon]="faCirclePlus" class="icon"></fa-icon>
-      
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+    <form class="grid-col-2">
+      <div class="input-group">
+        <fa-icon [icon]="search" class="input-group-text"></fa-icon>
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </div>
+
+      <button type="button" class="btn btn-outline-success" (click)="addContact()">
+        Add <fa-icon [icon]="add"></fa-icon> </button>
     </form>
   </div>
 </nav>
@@ -13,18 +15,11 @@
 <br>
 
 <main class="container-fluid">
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius et, eligendi voluptates dicta at laboriosam id ad quas illum, a libero odit quasi, obcaecati officiis dignissimos sapiente. Ipsum, deleniti maiores.
-    Distinctio, atque eius consectetur commodi doloribus modi similique veniam minus quod eligendi nemo esse repudiandae quidem officia odit quasi magni blanditiis eveniet sequi ea molestiae tempora quae neque? Explicabo, esse.
-    Magni veritatis qui ad nihil accusantium aliquid laborum consequuntur! Iusto esse nihil vero voluptas voluptates vitae, itaque blanditiis molestiae aliquid pariatur, magnam, quo hic corrupti quasi dolores numquam nostrum odio.
-    Libero recusandae voluptas accusamus, beatae labore impedit perspiciatis rerum. Aut repellat, fuga itaque nobis explicabo dolorum, qui laborum dignissimos blanditiis laboriosam accusamus facere porro labore voluptates. Officia quibusdam deleniti eius.
-    Provident quisquam enim repellendus earum cum neque? Recusandae dolores dignissimos sunt ut error similique tenetur incidunt consectetur repellat sit culpa, reiciendis animi impedit! Culpa accusantium beatae praesentium iste deserunt dolor?
-    Nihil tempora ex rerum pariatur id culpa veniam necessitatibus delectus maiores fugiat voluptatibus eligendi molestias nemo nam, eaque optio, voluptatum sint saepe magni amet laboriosam in quo quidem! Animi, sed!
-    Sint id reiciendis facilis totam et quia, odit a quae consequuntur! Perspiciatis eos cum nemo iste officiis, ipsa ullam vitae enim deserunt sunt corporis eum voluptatibus nisi mollitia laborum fugit?
-    Libero id qui eius commodi eveniet omnis nemo accusantium, placeat ad dolorem rem eum voluptatibus odio repellat. Quisquam itaque quasi reprehenderit obcaecati molestias officiis atque accusantium possimus aperiam? Nulla, minima.
-    Natus recusandae ullam, tenetur nesciunt reiciendis molestias quo perferendis, dolorem corporis eum tempora, vero officiis laborum ipsa? Non facere sequi expedita totam! Eius impedit odit suscipit dolor adipisci est quaerat?
-    Vel modi commodi, dolorum maxime fuga, nobis beatae assumenda suscipit aliquid dolores laboriosam minima numquam aspernatur doloremque molestias, corporis voluptas! Libero corrupti totam ex culpa iste earum ipsam adipisci repellendus!
-  </p>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let c of contactList">
+      <contact [user]="c"></contact>
+    </li>
+  </ul>
 </main>
 
 <router-outlet></router-outlet>

@@ -1,6 +1,6 @@
-
-.icon {
-    font-size: x-large;
-    margin-right: 30px;
-    cursor: pointer;
+.grid-col-2 {
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    gap: 20px;
+    align-items: center;
 }
