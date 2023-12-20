@@ -3,7 +3,7 @@
     <form class="grid-col-2">
       <div class="input-group">
         <fa-icon [icon]="search" class="input-group-text"></fa-icon>
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control" type="search" (input)="filterContacts($event)" placeholder="Search" aria-label="Search">
       </div>
 
       <button type="button" class="btn btn-outline-success" (click)="addContact()">
@@ -14,11 +14,20 @@
 
 <br>
 
-<main class="container-fluid">
+<main class="container">
   <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let c of contactList">
-      <contact [user]="c"></contact>
+    <li class="list-group-item">
+      <div class="row align-items-center fs-5 fw-bold">
+        <div class="col-2"></div>
+        <div class="col"> Name </div>
+        <div class="col"> Tel </div>
+        <div class="col"> Mail </div>
+    </div>
     </li>
+    <li class="list-group-item" *ngFor="let c of contactList">
+      <contact [user]="c" role="button"></contact>
+    </li>
+    
   </ul>
 </main>
 

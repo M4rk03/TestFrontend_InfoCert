@@ -1,11 +1,11 @@
 class ContactModel {
-    public img: string;
     public name: string;
+    public tel: number;
     public mail: string;
 
-    constructor(img: string, name: string, mail: string) {
-        this.img = img;
+    constructor(name: string, tel: number, mail: string) {
         this.name = name;
+        this.tel = tel;
         this.mail = mail;
     }
 }
