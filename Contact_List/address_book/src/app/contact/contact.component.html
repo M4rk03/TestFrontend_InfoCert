@@ -1,5 +1,5 @@
-<div class="row align-items-center fs-5">
-    <div class="col-2 fs-2">
+<div class="row align-items-center fs-5 card-body" (click)="collapse.toggle()" role="button">
+    <div class="col-1 fs-2">
         <fa-icon [icon]="imgUser"></fa-icon> </div>
 
     <div class="col"> {{ user.name }} </div>
@@ -7,4 +7,8 @@
     <div class="col"> {{ user.tel }} </div>
 
     <div class="col"> {{ user.mail }} </div>
+</div>
+
+<div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+    <div class="card-body">You can collapse this card by clicking one Toggle button</div>
 </div>

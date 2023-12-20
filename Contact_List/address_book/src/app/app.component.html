@@ -17,17 +17,14 @@
 <main class="container">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-      <div class="row align-items-center fs-5 fw-bold">
-        <div class="col-2"></div>
-        <div class="col"> Name </div>
-        <div class="col"> Tel </div>
-        <div class="col"> Mail </div>
-    </div>
+      <div class="row align-items-center fs-5 fw-bold px-3">
+        <div class="col-1"></div> <div class="col"> Name </div>
+        <div class="col"> Tel </div> <div class="col"> Mail </div>
+      </div>
     </li>
-    <li class="list-group-item" *ngFor="let c of contactList">
-      <contact [user]="c" role="button"></contact>
+    <li class="list-group-item" *ngFor="let c of contactList" style="border: none;">
+      <contact class="card" [user]="c"></contact>
     </li>
-    
   </ul>
 </main>
 
