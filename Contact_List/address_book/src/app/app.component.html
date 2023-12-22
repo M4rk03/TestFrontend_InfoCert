@@ -1,13 +1,12 @@
-<nav class="navbar navbar-light" style="background-color: #cff4fc;">
-  <div class="container-fluid">
+<nav class="navbar navbar-light fixed-top" style="background-color: #cff4fc;">
+  <div class="container-fluid py-2">
     <form class="grid-col-2">
       <div class="input-group">
-        <fa-icon [icon]="search" class="input-group-text"></fa-icon>
-        <input class="form-control" type="search" (input)="filterContacts($event)" placeholder="Search" aria-label="Search">
+        <fa-icon [icon]="search" class="input-group-text fs-5"></fa-icon>
+        <input class="form-control fs-5" type="search" (input)="filterContacts($event)" placeholder="Search" aria-label="Search">
       </div>
 
-      <button type="button" class="btn btn-outline-success" (click)="addContact()">
-        Add <fa-icon [icon]="add"></fa-icon> </button>
+      <add-contact (dataEvent)="receiveData($event)""></add-contact>
     </form>
   </div>
 </nav>
@@ -18,12 +17,12 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
       <div class="row align-items-center fs-5 fw-bold px-3">
-        <div class="col-1"></div> <div class="col"> Name </div>
-        <div class="col"> Tel </div> <div class="col"> Mail </div>
+        <div class="col-1"></div> <div class="col-3"> Name </div>
+        <div class="col-3"> Tel </div> <div class="col-4"> Mail </div>
       </div>
     </li>
     <li class="list-group-item" *ngFor="let c of contactList" style="border: none;">
-      <contact class="card" [user]="c"></contact>
+      <contact class="card rounded-pill" [user]="c"></contact>
     </li>
   </ul>
 </main>

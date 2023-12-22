@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faPen, faPhone, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -15,6 +15,9 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 export class ContactComponent {
   // Icon
   imgUser = faCircleUser;
+  phone = faPhone;
+  modify = faPen;
+  delete = faTrashCan;
 
   // Code
   @Input() user: any = {};

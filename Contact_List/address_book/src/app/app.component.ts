@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCirclePlus, faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { ContactComponent } from './contact/contact.component';
-import { FormsModule } from '@angular/forms';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
+import { ContactComponent } from './contact/contact.component';
+import { AddContactComponent } from './add-contact/add-contact.component';
 import ContactModel from './models/ContactModel';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FontAwesomeModule, ContactComponent, FormsModule],
+  imports: [CommonModule, RouterOutlet, FontAwesomeModule, ContactComponent, AddContactComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -19,16 +19,16 @@ export class AppComponent {
   title = 'address_book';
 
   // Icon
-  add = faPlus;
   search = faMagnifyingGlass
 
   // Code
   contactList: ContactModel[] = [
-    {name:'Marco', tel: 3001002000, mail:'marco@gmail.com'},
-    {name:'Filippo', tel: 3001002000, mail:'filippo@gmail.com'},
-    {name:'Giovanni', tel: 3001002000, mail:'giovanni@gmail.com'}
+    {name:'Marco', tel: '559-839-7263', mail:'marco@gmail.com'},
+    {name:'Filippo', tel: '588-464-7758', mail:'filippo@gmail.com'},
+    {name:'Giovanni', tel: '468-192-6518', mail:'giovanni@gmail.com'},
+    {name:'Gianluigi Carlo Salamella', tel: '471-453-9311', mail:'gianluigi.carlo.salamella@gmail.com'}
   ];
-
+  
   filteredContacts: ContactModel[] = [];
 
   constructor() {
@@ -53,8 +53,8 @@ export class AppComponent {
     );
   }
 
-  addContact(){
-    this.contactList.push({name:'Nome', tel: 100, mail:'mail@gmail.com'})
+  receiveData(data: ContactModel) {
+    this.contactList.push(data);
     this.sortContacts();
   }
 

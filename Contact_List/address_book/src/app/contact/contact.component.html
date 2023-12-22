@@ -1,14 +1,37 @@
 <div class="row align-items-center fs-5 card-body" (click)="collapse.toggle()" role="button">
-    <div class="col-1 fs-2">
+    <div class="col-1 d-grid justify-content-center fs-1">
         <fa-icon [icon]="imgUser"></fa-icon> </div>
 
-    <div class="col"> {{ user.name }} </div>
+    <div class="col-3"> {{ user.name }} </div>
 
-    <div class="col"> {{ user.tel }} </div>
+    <div class="col-3"> {{ user.tel }} </div>
 
-    <div class="col"> {{ user.mail }} </div>
+    <div class="col-4"> {{ user.mail }} </div>
 </div>
 
-<div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-    <div class="card-body">You can collapse this card by clicking one Toggle button</div>
+<div class="px-5">
+    <div class="border-top border-1 px-5" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <div class="card-body row text-center">
+            <div class="col d-grid justify-content-center">
+                <div class="d-grid" role="button">
+                    <fa-icon [icon]="phone" class="fs-5"></fa-icon>
+                    <small> Call </small>
+                </div>
+            </div>
+
+            <div class="col d-grid justify-content-center">
+                <div class="d-grid" role="button">
+                    <fa-icon [icon]="modify" class="fs-5"></fa-icon> 
+                    <small> Modify </small>
+                </div>
+            </div>
+
+            <div class="col d-grid justify-content-center">
+                <div class="d-grid" role="button">
+                    <fa-icon [icon]="delete" class="fs-5"></fa-icon>
+                    <small> Delete </small>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
