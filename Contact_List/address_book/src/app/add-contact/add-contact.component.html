@@ -2,7 +2,7 @@
     Add <fa-icon [icon]="add"></fa-icon> </button>
 
 <ng-template #content let-modal>
-    <form>
+    <form #myForm="ngForm">
 	<div class="modal-header">
             <h4 class="modal-title"> Add Contact </h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
@@ -10,22 +10,22 @@
         <div class="modal-body row g-3">
             <div class="col-12">
                 <label for="inputName" class="form-label"> Name </label>
-                <input type="text" [(ngModel)]="name" class="form-control" id="inputName">
+                <input type="text" name="myInputName" [(ngModel)]="name" class="form-control" id="inputName">
             </div>
 
             <div class="col-12">
                 <label for="inputTel" class="form-label"> Telephone </label>
-                <input type="number" class="form-control" id="inputTel" placeholder="xxx-xxx-xxxx">
+                <input type="number" name="myInputTel" [(ngModel)]="tel" class="form-control" id="inputTel" placeholder="xxx-xxx-xxxx">
             </div>
 
             <div class="col-12">
                 <label for="inputMail" class="form-label"> Mail </label>
-                <input type="text" class="form-control" id="inputMail">
+                <input type="email" name="myInputMail" [(ngModel)]="mail" class="form-control" id="inputMail">
             </div>
         </div>
         <div class="modal-footer">
             <button type="reset" class="btn btn-secondary"> Reset </button>
-            <button type="button" class="btn btn-primary" (click)="addContact()"> Add </button>
+            <button type="submit" class="btn btn-primary" (click)="addContact()"> Add </button>
         </div>
     </form>
 </ng-template>

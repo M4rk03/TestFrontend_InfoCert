@@ -18,21 +18,37 @@ export class AddContactComponent {
   add = faPlus;
 
   // Code
-  @Output() dataEvent = new EventEmitter<ContactModel[]>();
+  @Output() dataEvent = new EventEmitter<ContactModel>();
   private modalService = inject(NgbModal);
 
   name: string = "";
-  dataList: ContactModel[] = [];
+  tel: string = "";
+  mail: string = "";
 
+  
+
+  // apre un pop-up
   openPopup(content: TemplateRef<any>) {
 		this.modalService.open(content, { centered: true });
 	}
 
+  // inserisce un contatto
   addContact(){
     if (this.name != "") {
-      let d: ContactModel = new ContactModel(this.name, 'xxx-xxx-xxxx', 'name@gmail.com');
-      this.dataList.push(d);
-      this.dataEvent.emit(this.dataList);
+      let contact: ContactModel = {name: this.name, tel: this.formatTelNumber(this.tel), mail: this.mail};
+      this.dataEvent.emit(contact);
     }
   }
+
+  // formatta il numero di telefono
+  formatTelNumber(number: string): string {
+    let numStr = number.toString();
+    const regex = /^(\d{3})(\d{3})(\d{4})$/;
+    if (regex.test(numStr)) {
+      return numStr.replace(regex, '$1-$2-$3');
+    } else {
+      return "Formato non valido";
+    }
+  }
+
 }

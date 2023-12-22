@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -6,6 +6,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import { ContactComponent } from './contact/contact.component';
 import { AddContactComponent } from './add-contact/add-contact.component';
+import { JsonService } from './json.service';
 import ContactModel from './models/ContactModel';
 
 @Component({
@@ -15,27 +16,32 @@ import ContactModel from './models/ContactModel';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'address_book';
 
   // Icon
   search = faMagnifyingGlass
 
   // Code
-  contactList: ContactModel[] = [
-    {name:'Marco', tel: '559-839-7263', mail:'marco@gmail.com'},
-    {name:'Filippo', tel: '588-464-7758', mail:'filippo@gmail.com'},
-    {name:'Giovanni', tel: '468-192-6518', mail:'giovanni@gmail.com'},
-    {name:'Gianluigi Carlo Salamella', tel: '471-453-9311', mail:'gianluigi.carlo.salamella@gmail.com'}
-  ];
+  contactList: Array<ContactModel> = [];
   
-  filteredContacts: ContactModel[] = [];
+  filteredContacts: Array<ContactModel> = [];
 
-  constructor() {
+  constructor(private jsonService: JsonService) {
     this.sortContacts();
     this.filteredContacts = this.contactList;
   }
 
+  // prende i dati dal json
+  ngOnInit(): void {
+    this.jsonService.getContacts()
+      .subscribe(data => {
+        this.contactList = data;
+        console.log(this.contactList);
+      });
+  }
+
+  // riordina i contatti in ordine alfabetico
   sortContacts() {
     this.contactList.sort((a, b) => {
       const nameA = a.name.toLowerCase();
@@ -53,6 +59,7 @@ export class AppComponent {
     );
   }
 
+  // riceve il contatto da inserire
   receiveData(data: ContactModel) {
     this.contactList.push(data);
     this.sortContacts();
