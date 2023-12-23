@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import { ContactComponent } from './contact/contact.component';
 import { AddContactComponent } from './add-contact/add-contact.component';
-import { JsonService } from './json.service';
 import ContactModel from './models/ContactModel';
+import * as data from '../assets/data/contacts.json';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ import ContactModel from './models/ContactModel';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
   title = 'address_book';
 
   // Icon
@@ -27,18 +27,9 @@ export class AppComponent implements OnInit {
   
   filteredContacts: Array<ContactModel> = [];
 
-  constructor(private jsonService: JsonService) {
+  constructor() {
     this.sortContacts();
-    this.filteredContacts = this.contactList;
-  }
-
-  // prende i dati dal json
-  ngOnInit(): void {
-    this.jsonService.getContacts()
-      .subscribe(data => {
-        this.contactList = data;
-        console.log(this.contactList);
-      });
+    console.log(data);
   }
 
   // riordina i contatti in ordine alfabetico
