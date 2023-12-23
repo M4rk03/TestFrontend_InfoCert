@@ -1,31 +1,33 @@
-<button type="button" class="btn btn-outline-success fs-5" (click)="openPopup(content)">
-    Add <fa-icon [icon]="add"></fa-icon> </button>
+<a class="d-grid text-decoration-none" (click)="openPopup(content)" role="button">
+    <fa-icon [icon]="modify" class="fs-5"></fa-icon> 
+    <small> Edit </small>
+</a>
 
 <ng-template #content let-modal>
     <form #myForm="ngForm">
 	    <div class="modal-header">
-            <h4 class="modal-title"> Add Contact </h4>
+            <h4 class="modal-title"> Edit Contact </h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body row g-3">
             <div class="col-12">
                 <label for="inputName" class="form-label"> Name </label>
-                <input type="text" name="myInputName" [(ngModel)]="name" class="form-control" id="inputName">
+                <input type="text" name="myInputName" [value]="name" [(ngModel)]="name" class="form-control" id="inputName">
             </div>
 
             <div class="col-12">
                 <label for="inputTel" class="form-label"> Phone </label>
-                <input type="number" name="myInputTel" [(ngModel)]="tel" class="form-control" id="inputTel">
+                <input type="number" name="myInputTel" [value]="tel" [(ngModel)]="tel" class="form-control" id="inputTel">
             </div>
 
             <div class="col-12">
                 <label for="inputMail" class="form-label"> Mail </label>
-                <input type="email" name="myInputMail" [(ngModel)]="mail" class="form-control" id="inputMail">
+                <input type="email" name="myInputMail" [value]="mail" [(ngModel)]="mail" class="form-control" id="inputMail">
             </div>
         </div>
         <div class="modal-footer">
             <button type="reset" class="btn btn-secondary"> Reset </button>
-            <button type="submit" class="btn btn-primary" (click)="addContact()"> Add </button>
+            <button type="submit" class="btn btn-primary" (click)="updateContact()"> Update </button>
         </div>
     </form>
 </ng-template>

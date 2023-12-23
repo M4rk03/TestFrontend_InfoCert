@@ -1,22 +1,59 @@
-[
-    {
-       "name": "Marco",
-       "tel": "559-839-7263",
-       "mail": "marco@gmail.com"
-    },
-    {
-       "name": "Filippo",
-       "tel": "588-464-7758",
-       "mail": "filippo@gmail.com"
-    },
-    {
-       "name": "Giovanni",
-       "tel": "468-192-6518",
-       "mail": "giovanni@gmail.com"
-    },
-    {
-       "name": "Gianluigi Carlo Salamella",
-       "tel": "471-453-9311",
-       "mail": "gianluigi.carlo.salamella@gmail.com"
-    }
- ]
+{
+   "contacts": [
+      {
+         "name": "Ettore Fontana",
+         "tel": "3249195012",
+         "mail": "ettorefontana@gmail.com"
+      },
+      {
+         "name": "Giovanni Luppi",
+         "tel": "3453783353",
+         "mail": "giovanniluppi@gmail.com"
+      },
+      {
+         "name": "Viola Silvestri",
+         "tel": "3131838951",
+         "mail": "viola.silvestri@gmail.it"
+      },
+      {
+         "name": "Greta Vandelli",
+         "tel": "3421421504",
+         "mail": "greta.vandelli@gmail.com"
+      },
+      {
+         "name": "Noah Lodi",
+         "tel": "3425562038",
+         "mail": "noah.lodi@gmail.com"
+      },
+      {
+         "name": "Azzurra Malagoli",
+         "tel": "3108802254",
+         "mail": "azzurramalagoli@gmail.it"
+      },
+      {
+         "name": "Pietro Franchini",
+         "tel": "3297418650",
+         "mail": "pietrofranchini@gmail.com"
+      },
+      {
+         "name": "Andrea Sala",
+         "tel": "3295155977",
+         "mail": "andrea.sala@gmail.it"
+      },
+      {
+         "name": "Vittoria Ansaloni",
+         "tel": "3295838385",
+         "mail": "vittoria.ansaloni@gmail.com"
+      },
+      {
+         "name": "Michele Righi",
+         "tel": "3107151779",
+         "mail": "michelerighi@gmail.it"
+      },
+      {
+         "name": "Maria Lodi",
+         "tel": "3403774053",
+         "mail": "maria.lodi@gmail.com"
+      }
+   ]
+}

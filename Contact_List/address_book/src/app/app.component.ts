@@ -28,8 +28,8 @@ export class AppComponent{
   filteredContacts: Array<ContactModel> = [];
 
   constructor() {
+    this.contactList = data.contacts;
     this.sortContacts();
-    console.log(data);
   }
 
   // riordina i contatti in ordine alfabetico
@@ -51,9 +51,29 @@ export class AppComponent{
   }
 
   // riceve il contatto da inserire
-  receiveData(data: ContactModel) {
+  receiveDataInsert(data: ContactModel) {
     this.contactList.push(data);
     this.sortContacts();
   }
 
+  // riceve il contatto da eliminare
+  receiveDataDelete(value: string) {
+    this.contactList = this.contactList.filter(contact => contact.mail !== value);
+    this.sortContacts();
+  }
+
+  // riceve il contatto da modificare
+  receiveDataUpdate(data: Array<ContactModel>) {
+    this.contactList = this.contactList.map(contact => {
+      if (contact.mail === data[1].mail) {
+        return { 
+          ...contact,
+          name: data[0].name,
+          tel: data[0].tel,
+          mail: data[0].mail
+        };
+      }
+      return contact;
+    });
+  }
 }

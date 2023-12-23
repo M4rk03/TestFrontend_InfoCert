@@ -1,37 +1,55 @@
-<div class="row align-items-center fs-5 card-body" (click)="collapse.toggle()" role="button">
-    <div class="col-1 d-grid justify-content-center fs-1">
+<div class="grid-col-4 fs-5 card-body" (click)="collapse.toggle()" role="button">
+    <div class="grid-center-icon fs-1">
         <fa-icon [icon]="imgUser"></fa-icon> </div>
 
-    <div class="col-3"> {{ user.name }} </div>
+    <div> {{ user.name }} </div>
 
-    <div class="col-3"> {{ user.tel }} </div>
+    <div> +39 {{ getTelNumber(user.tel) }} </div>
 
-    <div class="col-4"> {{ user.mail }} </div>
+    <div> {{ user.mail }} </div>
 </div>
 
 <div class="px-5">
     <div class="border-top border-1 px-5" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
         <div class="card-body row text-center">
-            <div class="col d-grid justify-content-center">
-                <div class="d-grid" role="button">
-                    <fa-icon [icon]="phone" class="fs-5"></fa-icon>
+            <div class="col grid-center-icon">
+                <a [href]="(user.tel != '')? 'tel:+39'+user.tel : '#'" class="d-grid text-decoration-none">
+                    <fa-icon [icon]="call" class="fs-5"></fa-icon>
                     <small> Call </small>
-                </div>
+                </a>
             </div>
 
-            <div class="col d-grid justify-content-center">
-                <div class="d-grid" role="button">
-                    <fa-icon [icon]="modify" class="fs-5"></fa-icon> 
-                    <small> Modify </small>
-                </div>
+            <div class="col grid-center-icon">
+                <a [href]="(user.mail != '')? 'mailto:'+user.mail : '#'" class="d-grid text-decoration-none">
+                    <fa-icon [icon]="write" class="fs-5"></fa-icon>
+                    <small> Write </small>
+                </a>
             </div>
 
-            <div class="col d-grid justify-content-center">
-                <div class="d-grid" role="button">
+            <div class="col grid-center-icon">
+                <modify-contact [user]="contact" (dataEvent)="receiveDataUpdate($event)"></modify-contact>
+            </div>
+
+            <div class="col grid-center-icon">
+                <a class="d-grid text-decoration-none" (click)="openPopup(content)" role="button">
                     <fa-icon [icon]="delete" class="fs-5"></fa-icon>
                     <small> Delete </small>
-                </div>
+                </a>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title"> Delete Contact </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p> Are you sure? </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')"> No </button>
+        <button type="button" class="btn btn-primary" (click)="deleteContact()"> Yes </button>
+    </div>
+</ng-template>

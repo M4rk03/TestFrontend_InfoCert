@@ -6,7 +6,7 @@
         <input class="form-control fs-5" type="search" (input)="filterContacts($event)" placeholder="Search" aria-label="Search">
       </div>
 
-      <add-contact (dataEvent)="receiveData($event)"></add-contact>
+      <add-contact (dataEvent)="receiveDataInsert($event)"></add-contact>
     </form>
   </div>
 </nav>
@@ -16,13 +16,19 @@
 <main class="container">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-      <div class="row align-items-center fs-5 fw-bold px-3">
-        <div class="col-1"></div> <div class="col-3"> Name </div>
-        <div class="col-3"> Tel </div> <div class="col-4"> Mail </div>
+      <div class="grid-col-4 fs-5 fw-bold px-3">
+        <div></div> <div> Name </div> <div> Tel </div> <div> Mail </div>
       </div>
     </li>
+
     <li class="list-group-item" *ngFor="let c of contactList" style="border: none;">
-      <contact class="card rounded-pill" [user]="c"></contact>
+      <contact class="card rounded-pill contact" [user]="c" 
+        (dataEvent)="receiveDataDelete($event)" 
+        (otherdataEvent)="receiveDataUpdate($event)"></contact>
+    </li>
+
+    <li class="list-group-item" *ngIf="contactList && contactList.length === 0">
+      <p class="text-center fs-3"> No contact </p>
     </li>
   </ul>
 </main>

@@ -1,0 +1,10 @@
+.grid-col-4 {
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr 4fr;
+    align-items: center;
+}
+
+.grid-center-icon {
+    display: grid;
+    justify-content: center;
+}
