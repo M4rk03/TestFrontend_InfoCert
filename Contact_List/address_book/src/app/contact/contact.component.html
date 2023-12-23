@@ -4,9 +4,9 @@
 
     <div> {{ user.name }} </div>
 
-    <div> +39 {{ getTelNumber(user.tel) }} </div>
+    <div> {{ getTelNumber(user.tel) }} </div>
 
-    <div> {{ user.mail }} </div>
+    <div> {{ user.mail === '' ? 'no mail' : user.mail }} </div>
 </div>
 
 <div class="px-5">

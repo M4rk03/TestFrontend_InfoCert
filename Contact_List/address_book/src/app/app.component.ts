@@ -24,17 +24,20 @@ export class AppComponent{
 
   // Code
   contactList: Array<ContactModel> = [];
-  
-  filteredContacts: Array<ContactModel> = [];
+  contactsFound: Array<ContactModel> = [];
+
+  addressBook: Array<ContactModel> = [];
+  searchTerm: string = '';
 
   constructor() {
-    this.contactList = data.contacts;
+    this.addressBook = data.contacts;
+    this.contactList = this.addressBook;
     this.sortContacts();
   }
 
   // riordina i contatti in ordine alfabetico
   sortContacts() {
-    this.contactList.sort((a, b) => {
+    this.addressBook.sort((a, b) => {
       const nameA = a.name.toLowerCase();
       const nameB = b.name.toLowerCase();
       if (nameA < nameB) return -1;
@@ -43,28 +46,42 @@ export class AppComponent{
     });
   }
 
-  filterContacts(event: any) {
+  searchContacts(event: any) {
     const searchTerm = event.target.value.toLowerCase();
-    this.filteredContacts = this.contactList.filter(contact =>
-      contact.name.toLowerCase().includes(searchTerm)
-    );
+    this.searchTerm = searchTerm;
+    if (searchTerm === '' || searchTerm === ' ') {
+      this.contactList = this.addressBook;
+      this.contactsFound = [];
+    } else {
+      this.contactList = this.addressBook;
+      this.contactsFound = this.addressBook.filter(contact =>
+        contact.name.toLowerCase().includes(searchTerm) ||
+        contact.tel.includes(searchTerm)
+      );
+      this.contactList = this.addressBook.filter(contact => 
+        !(contact.name.toLowerCase().includes(searchTerm) ||
+        contact.tel.includes(searchTerm))
+      );
+    }
   }
 
   // riceve il contatto da inserire
   receiveDataInsert(data: ContactModel) {
-    this.contactList.push(data);
+    this.addressBook.push(data);
+    this.contactList = this.addressBook;
     this.sortContacts();
   }
 
   // riceve il contatto da eliminare
   receiveDataDelete(value: string) {
-    this.contactList = this.contactList.filter(contact => contact.mail !== value);
+    this.addressBook = this.addressBook.filter(contact => contact.mail !== value);
+    this.contactsFound = this.contactsFound.filter(contact => contact.mail !== value);
     this.sortContacts();
   }
 
   // riceve il contatto da modificare
   receiveDataUpdate(data: Array<ContactModel>) {
-    this.contactList = this.contactList.map(contact => {
+    this.addressBook = this.addressBook.map(contact => {
       if (contact.mail === data[1].mail) {
         return { 
           ...contact,
@@ -75,5 +92,7 @@ export class AppComponent{
       }
       return contact;
     });
+    this.sortContacts();
   }
+
 }

@@ -41,9 +41,9 @@ export class ContactComponent implements OnInit {
     let numStr = number.toString();
     const regex = /^(\d{3})(\d{3})(\d{4})$/;
     if (regex.test(numStr)) {
-    return numStr.replace(regex, '$1 $2 $3');
+    return '+39 ' + numStr.replace(regex, '$1 $2 $3');
     } else {
-    return "Formato non valido";
+    return "no phone number";
     }
   }
 

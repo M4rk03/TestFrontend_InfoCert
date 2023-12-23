@@ -3,7 +3,7 @@
     <form class="grid-col-2">
       <div class="input-group">
         <fa-icon [icon]="search" class="input-group-text fs-5"></fa-icon>
-        <input class="form-control fs-5" type="search" (input)="filterContacts($event)" placeholder="Search" aria-label="Search">
+        <input class="form-control fs-5" type="search" (input)="searchContacts($event)" placeholder="Search" aria-label="Search">
       </div>
 
       <add-contact (dataEvent)="receiveDataInsert($event)"></add-contact>
@@ -14,21 +14,39 @@
 <br>
 
 <main class="container">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
+  <ul class="list-group list-group-flush position-relative">
+    <li class="list-group-item border-0">
       <div class="grid-col-4 fs-5 fw-bold px-3">
         <div></div> <div> Name </div> <div> Tel </div> <div> Mail </div>
       </div>
     </li>
 
-    <li class="list-group-item" *ngFor="let c of contactList" style="border: none;">
+    <hr class="border-2"> 
+    
+    <span class="d-grid justify-content-end" *ngIf="searchTerm !== '' && searchTerm !== ' '"> 
+      {{contactsFound.length}} found </span>
+
+    <li class="list-group-item border-0" *ngFor="let f of contactsFound">
+      <contact class="card rounded-pill contact" [user]="f" 
+        (dataEvent)="receiveDataDelete($event)" 
+        (otherdataEvent)="receiveDataUpdate($event)"></contact>
+    </li>
+
+    <li class="list-group-item border-0" 
+      *ngIf="contactsFound && contactsFound.length === 0 && searchTerm !== '' && searchTerm !== ' '">
+      <p class="text-danger text-center fw-bold-light fs-3"> No results found </p>
+    </li>
+
+    <hr class="border-2" *ngIf="searchTerm !== '' && searchTerm !== ' '">
+
+    <li class="list-group-item border-0" *ngFor="let c of contactList">
       <contact class="card rounded-pill contact" [user]="c" 
         (dataEvent)="receiveDataDelete($event)" 
         (otherdataEvent)="receiveDataUpdate($event)"></contact>
     </li>
 
     <li class="list-group-item" *ngIf="contactList && contactList.length === 0">
-      <p class="text-center fs-3"> No contact </p>
+      <p class="text-danger text-center fs-3 pt-3"> No contact </p>
     </li>
   </ul>
 </main>
