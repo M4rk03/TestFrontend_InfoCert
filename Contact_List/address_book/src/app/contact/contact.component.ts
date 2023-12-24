@@ -16,7 +16,7 @@ import ContactModel from '../models/ContactModel';
   styleUrl: './contact.component.css'
 })
 export class ContactComponent implements OnInit {
-  // Icon
+  // Icons
   imgUser = faCircleUser;
   call = faPhone;
   write = faEnvelope;
@@ -36,7 +36,7 @@ export class ContactComponent implements OnInit {
     this.contact = this.user;
   }
 
-  // formatta il numero di telefono
+  // format the phone number
   public getTelNumber(number: string): string {
     let numStr = number.toString();
     const regex = /^(\d{3})(\d{3})(\d{4})$/;
@@ -47,18 +47,18 @@ export class ContactComponent implements OnInit {
     }
   }
 
-  // apre un pop-up
+  // opens a pop-up
   openPopup(content: TemplateRef<any>) {
 		this.modalService.open(content, { centered: true });
 	}
 
-  // elimina il contatto
-  deleteContact(){
+  // delete the contact
+  deleteContact() {
     this.dataEvent.emit(this.user.mail);
     this.modalService.dismissAll();
   }
 
-  // riceve il contatto da modificare
+  // receives the contact to edit
   receiveDataUpdate(data: Array<ContactModel>) {
     this.otherdataEvent.emit(data);
   }

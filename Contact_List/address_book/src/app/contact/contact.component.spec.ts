@@ -20,4 +20,11 @@ describe('ContactComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should format phone number correctly', () => {
+    const phoneNumber = '1234567890';
+    const formattedNumber = '+39 123 456 7890';
+    expect(component.getTelNumber(phoneNumber)).toBe(formattedNumber);
+  });
+  
 });
