@@ -2,33 +2,60 @@
 function getWeather(e) {
     e.preventDefault();
 
-    const apiKey = 'APIkey';
+    const apiKey = undefined; // replace with API key
     const city = document.getElementById('cityInput').value;
-    const lang = 'en';
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=${lang}`;
-    const hourlyForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric&lang=${lang}`;
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            displayWeather(data);
-        })
-        .catch(error => {
-            const weatherInfo = document.getElementById('weatherInfo');
-            weatherInfo.innerHTML = `
-                <h4 class="text-center text-danger"> No city found </h4>
-            `;
-            console.log('Errore nella richiesta:', error);
-        });
+    if (apiKey != undefined) {
+        // API
+        const lang = 'en';
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=${lang}`;
+        const hourlyForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric&lang=${lang}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                displayWeather(data);
+            })
+            .catch(error => {
+                const weatherInfo = document.getElementById('weatherInfo');
+                weatherInfo.innerHTML = `
+                    <h4 class="text-center text-danger"> No city found </h4>
+                `;
+                console.log('Error in the request:', error);
+            });
+        
+        fetch(hourlyForecastUrl)
+            .then(response => response.json())
+            .then(data => {
+                displayHourlyForecast(data);
+            })
+            .catch(error => {
+                console.log('Error in the request:', error);
+            });
+
+    } else {
+        // SIMULATION
+        simulateWeatherAPI(city)
+            .then(data => {
+                displayWeather(data);
+            })
+            .catch(error => {
+                const weatherInfo = document.getElementById('weatherInfo');
+                weatherInfo.innerHTML = `
+                    <h4 class="text-center text-danger"> No city found </h4>
+                `;
+                console.log('Error in the request:', error);
+            });
     
-    fetch(hourlyForecastUrl)
-        .then(response => response.json())
-        .then(data => {
-            displayHourlyForecast(data);
-        })
-        .catch(error => {
-            console.log('Errore nella richiesta:', error);
-        });
+        simulateForecastAPI(city)
+            .then(data => {
+                displayHourlyForecast(data);
+            })
+            .catch(error => {
+                console.log('Error in simulation:', error);
+            });
+    }
+    
 }
 
 // sets the first letter to uppercase
@@ -50,7 +77,7 @@ function setCardHTML(data) {
                 Pressure: ${data.main.pressure} hPa </p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item text-center"> ${(data.dt_txt === undefined)? 'Right now' : data.dt_txt} </li>
+                <li class="list-group-item text-center"> ${(data.dt_txt === undefined)? 'Current' : data.dt_txt} </li>
             </ul>
         </div>
     `;
@@ -60,7 +87,7 @@ function setCardHTML(data) {
 function displayWeather(data) {
     const weatherInfo = document.getElementById('weatherInfo');
     weatherInfo.innerHTML = `
-        <h3 class="text-center col-12"> Current weather situation in ${data.name} </h3>
+        <h3 class="text-center col-12"> Weather situation in ${data.name} </h3>
         ${setCardHTML(data)}
     `;
 }
@@ -76,4 +103,67 @@ function displayHourlyForecast(data) {
         });
         weatherInfo.innerHTML += forecastHTML;
     }
+}
+
+// SIMULATION
+
+// gets the current date
+function getCurrentDate(n) {
+    const data = new Date();
+    const futureDate = new Date(data.getTime() + 3 * 60 * 60 * 1000 * n); // 3 ore in millisecondi
+
+    let day, month, year, h;
+    
+    day = futureDate.getDate();
+    month = (futureDate.getMonth() + 1) + '-';
+    year = futureDate.getFullYear() + '-';
+
+    h = futureDate.getHours() + ":";
+
+    return year + month + day + ' ' + h + '00:00';
+}
+
+function simulateAPI(city, data = 0) {
+    return {
+        name: capitalizeFirstLetter(city),
+        main: {
+            temp: Math.floor(Math.random() * 30), // random temperature
+            humidity: Math.floor(Math.random() * 100), // random humidity 
+            pressure: Math.floor(Math.random() * 1000) // random pressure
+        },
+        weather: [
+            {
+                description: 'Cloudy', // description of time
+                icon: '03d' // weather icon
+            }
+        ],
+        dt_txt: (data != 0)? getCurrentDate(data) : undefined
+    };
+}
+
+function simulateWeatherAPI(city) {
+    const weatherData = simulateAPI(city);
+
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(weatherData);
+        }, 1000); // 1 second delay simulation
+    });
+}
+
+function simulateForecastAPI(city) {
+    const forecastData = {
+        list: []
+    };
+
+    for (let i=0; i < 3; i++) {
+        let el = simulateAPI(city, i+1);
+        forecastData.list.push(el);
+    }
+
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(forecastData);
+        }, 1000); // 1 second delay simulation
+    });
 }
