@@ -3,7 +3,7 @@
     <form class="grid-col-2">
       <div class="input-group">
         <fa-icon [icon]="search" class="input-group-text fs-5"></fa-icon>
-        <input class="form-control fs-5" type="search" (input)="searchContacts($event)" placeholder="Search" aria-label="Search">
+        <input class="form-control fs-5" #inputField type="search" [value]="searchTerm" (input)="searchContacts($event)" placeholder="Search" aria-label="Search">
       </div>
 
       <add-contact (dataEvent)="receiveDataInsert($event)"></add-contact>
